@@ -1,3 +1,11 @@
+<?php
+$this->title = "Article";
+use App\src\controller\FrontController;
+
+// Instanciation du FrontController pour utiliser la méthode generateCsrfToken()
+$frontController = new FrontController();
+$csrfToken = $frontController->generateCsrfToken();?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,6 +38,9 @@
         ?>
     </div>
     <form action="index.php?route=addComment&articleId=<?= $article->getId();?>" method="post">
+
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
+
         <label for="pseudo">Nom :</label><br>
         <input type="text" id="pseudo" name="pseudo" required><br><br>
 
